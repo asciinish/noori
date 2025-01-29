@@ -130,7 +130,7 @@ function timeElapse(date){
 
 // Usage example:
 function updateClock() {
-    const startDate = '2024-01-29'; // Example start date
+    const startDate = '2025-01-19'; // Example start date
     const elapsedTimeHTML = calculateElapsedTime(startDate);
     document.getElementById('elapseClock').innerHTML = elapsedTimeHTML;
 }
