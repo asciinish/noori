@@ -93,51 +93,7 @@ function startHeartAnimation() {
 })(jQuery);
 
 function timeElapse(date){
-	const current = new Date();
-    const start = new Date(startDate);
-    
-    // Calculate total seconds between dates
-    let seconds = Math.floor((current - start) / 1000);
-    
-    // Calculate time components
-    const days = Math.floor(seconds / (3600 * 24));
-    seconds = seconds % (3600 * 24);
-    
-    const hours = Math.floor(seconds / 3600);
-    seconds = seconds % 3600;
-    
-    const minutes = Math.floor(seconds / 60);
-    seconds = seconds % 60;
-    
-    // Format components to ensure two digits
-    const padNumber = num => num.toString().padStart(2, '0');
-    
-    const formattedTime = {
-        days,
-        hours: padNumber(hours),
-        minutes: padNumber(minutes),
-        seconds: padNumber(seconds)
-    };
-    
-    // Generate HTML with formatted time
-    return `
-        <span class="digit">${formattedTime.days}</span> days 
-        <span class="digit">${formattedTime.hours}</span> hours 
-        <span class="digit">${formattedTime.minutes}</span> minutes 
-        <span class="digit">${formattedTime.seconds}</span> seconds
-    `;
-}
-
-// Usage example:
-function updateClock() {
-    const startDate = '2025-01-19'; // Example start date
-    const elapsedTimeHTML = calculateElapsedTime(startDate);
-    document.getElementById('elapseClock').innerHTML = elapsedTimeHTML;
-}
-
-// Update clock every second
-setInterval(updateClock, 1000);
-}
+	
 
 function showMessages() {
 	adjustWordsPosition();
