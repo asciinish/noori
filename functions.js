@@ -93,25 +93,50 @@ function startHeartAnimation() {
 })(jQuery);
 
 function timeElapse(date){
-	var current = Date();
-	var seconds = (Date.parse(current) - Date.parse(date)) / 1000;
-	var days = Math.floor(seconds / (3600 * 24));
-	seconds = seconds % (3600 * 24);
-	var hours = Math.floor(seconds / 3600);
-	if (hours < 10) {
-		hours = "0" + hours;
-	}
-	seconds = seconds % 3600;
-	var minutes = Math.floor(seconds / 60);
-	if (minutes < 10) {
-		minutes = "0" + minutes;
-	}
-	seconds = seconds % 60;
-	if (seconds < 10) {
-		seconds = "0" + seconds;
-	}
-	var result = "<span class=\"digit\">" + days + "</span> days <span class=\"digit\">" + hours + "</span> hours <span class=\"digit\">" + minutes + "</span> minutes <span class=\"digit\">" + seconds + "</span> seconds"; 
-	$("#elapseClock").html(result);
+	const current = new Date();
+    const start = new Date(startDate);
+    
+    // Calculate total seconds between dates
+    let seconds = Math.floor((current - start) / 1000);
+    
+    // Calculate time components
+    const days = Math.floor(seconds / (3600 * 24));
+    seconds = seconds % (3600 * 24);
+    
+    const hours = Math.floor(seconds / 3600);
+    seconds = seconds % 3600;
+    
+    const minutes = Math.floor(seconds / 60);
+    seconds = seconds % 60;
+    
+    // Format components to ensure two digits
+    const padNumber = num => num.toString().padStart(2, '0');
+    
+    const formattedTime = {
+        days,
+        hours: padNumber(hours),
+        minutes: padNumber(minutes),
+        seconds: padNumber(seconds)
+    };
+    
+    // Generate HTML with formatted time
+    return `
+        <span class="digit">${formattedTime.days}</span> days 
+        <span class="digit">${formattedTime.hours}</span> hours 
+        <span class="digit">${formattedTime.minutes}</span> minutes 
+        <span class="digit">${formattedTime.seconds}</span> seconds
+    `;
+}
+
+// Usage example:
+function updateClock() {
+    const startDate = '2024-01-29'; // Example start date
+    const elapsedTimeHTML = calculateElapsedTime(startDate);
+    document.getElementById('elapseClock').innerHTML = elapsedTimeHTML;
+}
+
+// Update clock every second
+setInterval(updateClock, 1000);
 }
 
 function showMessages() {
